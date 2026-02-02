@@ -1,0 +1,9 @@
+import { TypeormBaseEntity } from "@common/entity/base.entity";
+import { Column, Entity } from "typeorm";
+
+@Entity('{{lowerCase name}}')
+export class {{pascalCase name}} extends TypeormBaseEntity { 
+    // FYI: You can remove this comment 
+    // add you columns here 
+    // id, created date, update date are already defined in the base entity 
+}

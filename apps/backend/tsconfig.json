@@ -1,0 +1,46 @@
+{
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "declaration": false,
+    "outDir": "../../dist",
+    "baseUrl": ".",
+    "paths": {
+      "@decorators/*": [
+        "src/decorators/*"
+      ],
+      "@controllers/*": [
+        "src/controllers/*"
+      ],
+      "@modules/*": [
+        "src/modules/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@entities/*": [
+        "src/entities/*"
+      ],
+      "@auth/*": [
+        "src/auth/*"
+      ],
+      "@guards/*": [
+        "src/guards/*"
+      ],
+      "@common": [
+        "../../libs/common/src"
+      ],
+      "@common/*": [
+        "../../libs/common/src/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test",
+    "**/*spec.ts"
+  ]
+}

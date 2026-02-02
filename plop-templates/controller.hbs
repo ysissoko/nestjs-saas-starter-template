@@ -1,0 +1,12 @@
+import { BaseController } from "@common/controller/base.controller";
+import { {{ pascalCase name  }}Service} from './{{ kebabCase name  }}.service';
+import { Controller } from "@nestjs/common";
+import { {{ pascalCase name  }} } from "@entities"
+
+@Controller('{{ lowerCase name }}')
+export class {{ pascalCase name  }}Controller extends BaseController<{{ pascalCase name }}> {
+
+  constructor(private readonly {{ lowerCase name }}Service: {{ pascalCase name  }}Service) {
+    super({{ lowerCase name }}Service);
+  }
+}

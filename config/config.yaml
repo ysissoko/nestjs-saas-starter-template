@@ -1,0 +1,106 @@
+# Application Configuration
+app:
+  name: 'NestJS SaaS Starter'
+  host: '127.0.0.1'
+  port: 3000
+
+  # Database - MySQL/PostgreSQL
+  database:
+    type: mysql
+    host: 127.0.0.1
+    port: 3306
+    username: root
+    password: # REQUIRED: Set via DB_PASSWORD environment variable
+    database: nestjs_starter
+    synchronize: false # Always use migrations in production
+    entities: ['dist/**/*.entity{.ts,.js}']
+
+  # Rate limiting (throttling)
+  throttler:
+    ttl: 60000 # Time window in milliseconds
+    limit: 300 # Max requests per window
+
+  # Frontend URL (for CORS and redirects)
+  frontend:
+    url: 'http://localhost:5173'
+
+  # Authentication & Authorization
+  auth:
+    # OTP (One-Time Password) for 2FA
+    otp:
+      enabled: true
+      template: 'templates/otp.hbs'
+      expiry: '15m'
+
+    # Email verification
+    verificationEmail:
+      token:
+        expiresIn: '24h'
+        secret: # REQUIRED: Set via EMAIL_VERIFICATION_SECRET environment variable
+      template: 'templates/verification-email.hbs'
+
+    # Password reset
+    resetPasswordEmail:
+      token:
+        expiresIn: '1h'
+        secret: # REQUIRED: Set via PASSWORD_RESET_SECRET environment variable
+      template: 'templates/reset-password.hbs'
+
+    # JWT configuration
+    jwt:
+      secret: # REQUIRED: Set via JWT_SECRET environment variable
+      signOptions:
+        expiresIn: 60m
+        issuer: nestjs-saas-starter
+
+    # Passport configuration
+    passport:
+      defaultStrategy: 'jwt'
+
+    # Google OAuth (optional - remove if not needed)
+    google:
+      clientID: # OPTIONAL: Set via GOOGLE_CLIENT_ID environment variable
+      clientSecret: # OPTIONAL: Set via GOOGLE_CLIENT_SECRET environment variable
+      callbackURL: 'http://localhost:3000/auth/google/callback'
+
+    # Facebook OAuth (optional - remove if not needed)
+    facebook:
+      clientID: # OPTIONAL: Set via FACEBOOK_CLIENT_ID environment variable
+      clientSecret: # OPTIONAL: Set via FACEBOOK_CLIENT_SECRET environment variable
+      callbackURL: 'http://localhost:3000/auth/facebook/callback'
+
+  # Storage - S3-compatible (AWS S3, DigitalOcean Spaces, MinIO)
+  # OPTIONAL: Remove this section if file upload is not needed
+  storage:
+    type: s3
+    bucket: # OPTIONAL: Set via STORAGE_BUCKET environment variable
+    endpoint: # OPTIONAL: Set via STORAGE_ENDPOINT environment variable (e.g., https://s3.amazonaws.com)
+    region: us-east-1 # OPTIONAL: Set via STORAGE_REGION environment variable
+    accessKeyId: # OPTIONAL: Set via STORAGE_ACCESS_KEY_ID environment variable
+    secretAccessKey: # OPTIONAL: Set via STORAGE_SECRET_ACCESS_KEY environment variable
+
+  # Email service (SMTP)
+  mail:
+    from: 'NestJS SaaS Starter <noreply@example.com>'
+    transport:
+      host: smtp.gmail.com
+      port: 587
+      secure: false
+      auth:
+        user: # REQUIRED: Set via MAILER_USER environment variable
+        pass: # REQUIRED: Set via MAILER_PASS environment variable
+
+  # Stripe payment integration
+  # OPTIONAL: Remove this section if payments are not needed
+  stripe:
+    apiKey: # OPTIONAL: Set via STRIPE_API_KEY environment variable
+    apiVersion: 2025-09-30.clover
+    webhook:
+      secret: # OPTIONAL: Set via STRIPE_WEBHOOK_SECRET environment variable
+
+  # CORS configuration
+  cors:
+    origin: [http://localhost:5173, http://localhost:5174]
+    methods: GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS
+    allowedHeaders: Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Auth-Token
+    credentials: true

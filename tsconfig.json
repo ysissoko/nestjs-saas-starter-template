@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    /* Runtime / output */
+    "target": "ES2023",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "declaration": true,
+    "removeComments": true,
+    "incremental": true,
+
+    /* Decorators (NestJS-required) */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    /* Interop */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    /* Strictness (coherent set) */
+    "strict": false,
+    "strictPropertyInitialization": false,
+
+    /* Safety / correctness */
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+
+    /* Paths / resolution */
+    "baseUrl": ".",
+    "paths": {
+      "@common": ["libs/common/src"],
+      "@common/*": ["libs/common/src/*"]
+    },
+
+    /* Types */
+    "types": ["node", "jest"]
+  }
+}

@@ -1,0 +1,139 @@
+# Application Configuration Example
+# Copy this file to config.yaml and configure according to your needs
+# All secrets should be set via environment variables (see .env.example)
+
+app:
+  name: 'NestJS SaaS Starter'
+  host: '127.0.0.1'
+  port: 3000
+
+  # Database Configuration
+  # Supports: mysql, postgres, sqlite, mariadb
+  database:
+    type: mysql
+    host: 127.0.0.1
+    port: 3306
+    username: root
+    password: # Override with DB_PASSWORD env var
+    database: nestjs_starter
+    synchronize: false # NEVER set to true in production! Use migrations instead.
+    entities: ['dist/**/*.entity{.ts,.js}']
+
+    # Additional database options (uncomment if needed):
+    # logging: true
+    # ssl: false
+    # charset: utf8mb4
+
+  # Rate Limiting (Throttling)
+  # Protects against brute force and DDoS attacks
+  throttler:
+    ttl: 60000 # Time window in milliseconds (60 seconds)
+    limit: 300 # Maximum requests per window (override with RATE_LIMIT env var)
+
+  # Frontend URL
+  # Used for CORS and redirect URLs (email verification, password reset, etc.)
+  frontend:
+    url: 'http://localhost:5173'
+
+  # Authentication & Authorization Configuration
+  auth:
+    # One-Time Password (OTP) for 2FA
+    otp:
+      enabled: true
+      template: 'templates/otp.hbs' # Handlebars email template
+      expiry: '15m' # OTP validity period
+
+    # Email Verification
+    verificationEmail:
+      token:
+        expiresIn: '24h' # Verification link validity
+        secret: # Override with EMAIL_VERIFICATION_SECRET env var (min 32 characters)
+      template: 'templates/verification-email.hbs'
+
+    # Password Reset
+    resetPasswordEmail:
+      token:
+        expiresIn: '1h' # Reset link validity
+        secret: # Override with PASSWORD_RESET_SECRET env var (min 32 characters)
+      template: 'templates/reset-password.hbs'
+
+    # JSON Web Token (JWT) Configuration
+    jwt:
+      secret: # Override with JWT_SECRET env var (min 32 characters)
+      signOptions:
+        expiresIn: 60m # Token lifetime (consider shorter for production)
+        issuer: nestjs-saas-starter # JWT issuer claim
+
+    # Passport Strategy
+    passport:
+      defaultStrategy: 'jwt'
+
+    # Google OAuth 2.0 (Optional)
+    # Get credentials from: https://console.cloud.google.com/apis/credentials
+    google:
+      clientID: # Override with GOOGLE_CLIENT_ID env var
+      clientSecret: # Override with GOOGLE_CLIENT_SECRET env var
+      callbackURL: 'http://localhost:3000/auth/google/callback'
+      # Scopes requested: profile, email (default)
+
+    # Facebook OAuth (Optional)
+    # Get credentials from: https://developers.facebook.com/apps/
+    facebook:
+      clientID: # Override with FACEBOOK_CLIENT_ID env var
+      clientSecret: # Override with FACEBOOK_CLIENT_SECRET env var
+      callbackURL: 'http://localhost:3000/auth/facebook/callback'
+      profileFields: ['id', 'displayName', 'email', 'photos']
+
+  # File Storage Configuration (Optional)
+  # Supports S3-compatible storage: AWS S3, DigitalOcean Spaces, MinIO, etc.
+  storage:
+    type: s3
+    bucket: # Override with STORAGE_BUCKET env var (e.g., my-app-uploads)
+    endpoint: # Override with STORAGE_ENDPOINT env var
+              # AWS S3: https://s3.amazonaws.com
+              # DigitalOcean Spaces: https://fra1.digitaloceanspaces.com
+              # MinIO: http://localhost:9000
+    region: us-east-1 # Override with STORAGE_REGION env var (AWS region)
+    accessKeyId: # Override with STORAGE_ACCESS_KEY_ID env var
+    secretAccessKey: # Override with STORAGE_SECRET_ACCESS_KEY env var
+    # Additional options:
+    # acl: 'public-read' # File access control (public-read, private, etc.)
+    # signedUrlExpires: 3600 # Signed URL expiration in seconds
+
+  # Email Service (SMTP) Configuration
+  mail:
+    from: 'NestJS SaaS Starter <noreply@example.com>' # Sender email and name
+    transport:
+      host: smtp.gmail.com # SMTP server (Gmail, SendGrid, Mailgun, etc.)
+      port: 587 # 587 for TLS, 465 for SSL
+      secure: false # true for SSL, false for TLS
+      auth:
+        user: # Override with MAILER_USER env var (email address)
+        pass: # Override with MAILER_PASS env var (app password or API key)
+      # Gmail requires "App Passwords": https://myaccount.google.com/apppasswords
+      # For SendGrid: host: smtp.sendgrid.net, user: apikey, pass: YOUR_API_KEY
+
+  # Stripe Payment Integration (Optional)
+  # Get credentials from: https://dashboard.stripe.com/apikeys
+  stripe:
+    apiKey: # Override with STRIPE_API_KEY env var (starts with sk_)
+    apiVersion: 2025-09-30.clover # Stripe API version
+    webhook:
+      secret: # Override with STRIPE_WEBHOOK_SECRET env var (starts with whsec_)
+      # Webhook endpoint: https://yourdomain.com/webhook/stripe
+      # Configure in Stripe Dashboard: https://dashboard.stripe.com/webhooks
+
+  # CORS (Cross-Origin Resource Sharing) Configuration
+  cors:
+    origin:
+      - http://localhost:5173 # Frontend dev server (Vite)
+      - http://localhost:5174 # Additional frontend
+      # Add production domains:
+      # - https://yourdomain.com
+      # - https://app.yourdomain.com
+    methods: GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS
+    allowedHeaders: Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Auth-Token
+    credentials: true # Allow cookies and authentication headers
+    # Additional CORS options:
+    # maxAge: 3600 # Preflight cache duration in seconds
+    # exposedHeaders: X-Total-Count

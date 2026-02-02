@@ -1,0 +1,57 @@
+{
+  "name": "nestjs-saas-starter",
+  "version": "1.0.0",
+  "description": "Production-ready NestJS starter for SaaS applications with authentication, RBAC, and CRUD base classes",
+  "author": "",
+  "license": "MIT",
+  "keywords": [
+    "nestjs",
+    "typescript",
+    "saas",
+    "starter",
+    "template",
+    "typeorm",
+    "authentication",
+    "authorization",
+    "rbac",
+    "casl",
+    "jwt",
+    "oauth"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/nestjs-saas-starter"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "scripts": {
+    "backend:dev": "pnpm --filter backend start:dev",
+    "backend:build": "pnpm --filter backend build",
+    "backend:start": "pnpm --filter backend start:prod",
+    "backend:test": "pnpm --filter backend test",
+    "backend:test:watch": "pnpm --filter backend test:watch",
+    "backend:test:cov": "pnpm --filter backend test:cov",
+    "db:migrate": "pnpm --filter backend migration:run",
+    "db:migrate:revert": "pnpm --filter backend migration:revert",
+    "db:migrate:generate": "pnpm --filter backend migration:generate",
+    "db:seed": "pnpm --filter backend seed:run",
+    "lint": "pnpm -r --stream exec eslint . --fix",
+    "format": "pnpm -r --stream exec prettier --write \"src/**/*.{ts,js,json}\"",
+    "typecheck": "pnpm -r --stream exec tsc --noEmit",
+    "clean": "rimraf --glob '**/dist' '**/node_modules' 'pnpm-lock.yaml'",
+    "setup": "bash scripts/setup.sh"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "^3.2.5",
+    "rimraf": "^6.1.2",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.3.3"
+  }
+}

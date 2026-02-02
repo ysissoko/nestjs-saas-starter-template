@@ -1,0 +1,10 @@
+packages:
+  - apps/*
+  - libs/*
+onlyBuiltDependencies:
+  - '@nestjs/core'
+  - '@parcel/watcher'
+  - '@scarf/scarf'
+  - bcrypt
+  - core-js
+  - vue-demi

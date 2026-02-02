@@ -1,0 +1,42 @@
+version: '3'
+services:
+  backend:
+    container_name: backend
+    image: ysissoko/gym-fit-hub-backend:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    restart: always
+    volumes:
+      - ./config/config.yaml:/usr/src/app/config/config.yaml # Mount a file from the host
+      - ./templates:/usr/src/app/templates # Mount templates directory for email templates
+    ports:
+      - 3000:3000
+    platform: linux/amd64
+    networks:
+      - app-network # Assign to the custom network
+    depends_on:
+      - backend-db # Ensure database starts before backend
+
+  backend-db:
+    container_name: backend-db
+    image: mysql:8.0 # MySQL database for the application
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: gym_hub
+      MYSQL_USER: gateway
+      MYSQL_PASSWORD: gateway
+    platform: linux/amd64
+    networks:
+      - app-network # Assign to the custom network
+    volumes:
+      - mysql_data:/var/lib/mysql # Persist MySQL data on the host
+    command: --default-authentication-plugin=mysql_native_password # For better compatibility
+
+volumes:
+  mysql_data: # Define a named volume for MySQL data persistence
+    driver: local # Use the local driver for volume storage
+networks:
+  app-network: # Define the custom network
+    driver: bridge # Default network driver

@@ -1,0 +1,12 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { BaseService } from "@common/services/base.service";
+import { {{ pascalCase name }} } from "../entities";
+
+@Injectable()
+export class {{ pascalCase name  }}Service extends BaseService<{{ pascalCase name }}> {
+  constructor(@InjectRepository({{ pascalCase name }}) readonly {{ camelCase name  }}Repository: Repository<{{ pascalCase name }}>){
+      super({{ camelCase name  }}Repository);
+    }
+}
