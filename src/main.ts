@@ -46,7 +46,7 @@ async function bootstrap() {
   app.enableCors(corsConfig);
 
   // Security middleware
-  app.use(cookieParser());
+  // app.use(cookieParser());
   app.use(helmet());
 
   // Enable validation globally

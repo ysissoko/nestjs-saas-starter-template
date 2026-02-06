@@ -10,7 +10,7 @@ app:
     host: 127.0.0.1
     port: 3306
     username: root
-    password: # REQUIRED: Set via DB_PASSWORD environment variable
+    password: root
     database: nestjs_starter
     synchronize: false # Always use migrations in production
     entities: ['dist/**/*.entity{.ts,.js}']

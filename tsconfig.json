@@ -30,11 +30,41 @@
     /* Paths / resolution */
     "baseUrl": ".",
     "paths": {
-      "@common": ["libs/common/src"],
-      "@common/*": ["libs/common/src/*"]
+      "@": ["src/*"],
+      "@common": ["src/common"],
+      "@common/*": ["src/common/*"],
+      "@decorators/*": [
+        "src/decorators/*"
+      ],
+      "@controllers/*": [
+        "src/controllers/*"
+      ],
+      "@modules/*": [
+        "src/modules/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@entities/*": [
+        "src/entities/*"
+      ],
+      "@auth/*": [
+        "src/auth/*"
+      ],
+      "@guards/*": [
+        "src/guards/*"
+      ]
     },
-
     /* Types */
     "types": ["node", "jest"]
-  }
+  },
+  "include": [
+  "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test",
+    "**/*spec.ts"
+  ],
 }

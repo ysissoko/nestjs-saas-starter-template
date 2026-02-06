@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
-import { GatewayModule } from '../backend/src/gateway.module';
+import { GatewayModule } from '../src/gateway.module';
 import { Repository } from 'typeorm';
-import { Account } from '../backend/src/auth/modules/account/account.entity';
-import { Role } from '../backend/src/auth/entities/role.entity';
+import { Account } from '../src/auth/modules/account/account.entity';
+import { Role } from '../src/auth/entities/role.entity';
 import * as bcrypt from 'bcrypt';
 import * as readline from 'readline';
 
@@ -36,7 +36,7 @@ function questionHidden(query: string): Promise<string> {
 
     let password = '';
     stdin.on('data', (char: string) => {
-      char = char.toString('utf8');
+      char = char.toString();
 
       switch (char) {
         case '\n':
@@ -184,7 +184,7 @@ async function createAdminUser() {
 
     await app.close();
     process.exit(0);
-  } catch (error) {
+  } catch (error: any) {
     console.error('\n❌ Error creating admin user:', error.message);
     rl.close();
     process.exit(1);

@@ -2,12 +2,12 @@
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
   "monorepo": false,
-  "root": "apps/backend",
-  "sourceRoot": "apps/backend/src",
+  "root": ".",
+  "sourceRoot": "src",
   "entryFile": "main",
   "compilerOptions": {
     "webpack": true,
     "webpackConfigPath": "webpack.config.js",
-    "tsConfigPath": "apps/backend/tsconfig.json"
+    "tsConfigPath": "tsconfig.json"
   }
 }

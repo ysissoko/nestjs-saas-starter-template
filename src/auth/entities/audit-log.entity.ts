@@ -72,7 +72,6 @@ export class AuditLog extends TypeormBaseEntity {
   action: AuditAction;
 
   @Column({ type: 'varchar', length: 100 })
-  @Index()
   entityType: string; // 'Permission', 'Role', 'Account', etc.
 
   @Column({ type: 'varchar', length: 100, nullable: true })
