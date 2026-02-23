@@ -9,7 +9,6 @@ import {
   Req,
   Logger,
   Delete,
-  Patch,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';

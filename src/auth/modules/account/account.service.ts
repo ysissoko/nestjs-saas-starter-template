@@ -46,7 +46,6 @@ export class AccountService extends BaseService<Account> {
     @InjectRepository(Account)
     private readonly accountRepository: Repository<Account>,
     @InjectRepository(Profile)
-    private readonly profileRepository: Repository<Profile>,
     private readonly otpService: OtpService,
     private readonly tokenService: TokenService,
     private readonly roleService: RoleService,
