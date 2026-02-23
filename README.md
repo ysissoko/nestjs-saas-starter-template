@@ -80,36 +80,48 @@ A production-ready NestJS backend template for building SaaS applications with a
 
 ```
 nestjs-saas-starter/
-├── apps/backend/
-│   ├── src/
-│   │   ├── auth/              # Complete auth module (JWT, OAuth, RBAC, CASL)
-│   │   ├── decorators/        # Custom decorators (@HasPermissions, etc.)
-│   │   ├── guards/            # Auth & permission guards
-│   │   ├── modules/
-│   │   │   ├── example/       # Example module (reference implementation)
-│   │   │   └── upload/        # File upload module (S3-compatible)
-│   │   ├── services/          # Global services (Stripe, etc.)
-│   │   ├── database/          # Migrations & seeds
-│   │   ├── main.ts            # Application entry point
-│   │   └── gateway.module.ts  # Root module
-│   ├── test/                  # E2E tests
-│   └── package.json
-├── libs/
-│   └── common/
-│       └── src/
-│           ├── controller/    # BaseController (8 CRUD endpoints)
-│           ├── services/      # BaseService (pagination, filtering)
-│           ├── entity/        # BaseEntity (timestamps, id)
-│           ├── config/        # Configuration system
-│           ├── enums/         # Permissions, actions, subjects
-│           └── paginate/      # Pagination utilities
+├── src/
+│   ├── auth/                        # Complete auth module (JWT, OAuth, RBAC, CASL)
+│   │   ├── guards/                  # Auth guards (JWT, Google, Facebook, Local)
+│   │   ├── strategies/              # Passport strategies
+│   │   ├── services/                # Auth services (token, OTP, audit-log)
+│   │   ├── subscribers/             # TypeORM event subscribers
+│   │   ├── decorators/              # Auth decorators (@Public, etc.)
+│   │   ├── entities/                # Auth entities (Role, OTP, AuditLog)
+│   │   └── modules/
+│   │       ├── account/             # Account & profile management
+│   │       ├── role/                # Role management
+│   │       └── permission/          # CASL permission management
+│   ├── common/                      # Shared base classes & utilities
+│   │   ├── controller/              # BaseController (8 CRUD endpoints)
+│   │   ├── services/                # BaseService (pagination, filtering)
+│   │   ├── entity/                  # BaseEntity (timestamps, id)
+│   │   ├── config/                  # Configuration system
+│   │   ├── dto/                     # Shared DTOs (ACL, Stripe)
+│   │   ├── enums/                   # Permissions, actions, subjects
+│   │   ├── exceptions/              # Custom exceptions
+│   │   └── pagination/              # Pagination utilities
+│   ├── controllers/                 # Global controllers (mailer, stripe, webhook)
+│   ├── decorators/                  # Custom decorators (@HasPermissions, etc.)
+│   ├── guards/                      # Permission guards
+│   ├── entities/                    # Domain entities
+│   ├── modules/
+│   │   ├── notification/            # Notification module
+│   │   └── upload/                  # File upload module (S3-compatible)
+│   ├── services/                    # Global services (Email, Stripe)
+│   ├── database/
+│   │   └── seeds/                   # Database seed scripts
+│   ├── data-source.ts               # TypeORM data source
+│   ├── main.ts                      # Application entry point
+│   └── gateway.module.ts            # Root module
 ├── config/
-│   ├── config.yaml            # Main configuration
-│   └── config.example.yaml    # Configuration reference
-├── templates/                 # Email templates (Handlebars)
-├── plop-templates/            # Code generator templates
-├── scripts/                   # Setup & utility scripts
-├── docs/                      # Documentation
+│   ├── config.yaml                  # Main configuration
+│   └── config.example.yaml          # Configuration reference
+├── templates/                       # Email templates (Handlebars)
+├── plop-templates/                  # Code generator templates
+├── scripts/                         # Setup & utility scripts
+├── docs/                            # Documentation
+├── Dockerfile
 └── docker-compose.yml
 ```
 
